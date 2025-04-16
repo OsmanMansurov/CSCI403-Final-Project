@@ -27,7 +27,7 @@ CREATE TABLE electric_vehicles (
 
 -- (Q2) Load data into the table (\copy ...)
 
-\copy electric_vehicles FROM '../'Electric Vehicle Data.csv'' WITH (DELIMITER ',', FORMAT CSV, HEADER);
+\copy electric_vehicles FROM 'data/Electric\ Vehicle\ Data.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
 
 
 -- (Q4) Normalized schemas (CREATE TABLE ...)
