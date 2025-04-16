@@ -4,5 +4,10 @@ output: html_notebook
 ---
 
 ```{r}
-plot(cars)
+evData <- read.csv("Electric Vehicle Data.csv")
+```
+
+```{r}
+model <- lm(Electric.Range ~ Model.Year, data = evData)
+anova(model)
 ```
