@@ -1,0 +1,8 @@
+---
+title: "CSCI403 Analysis"
+output: html_notebook
+---
+
+```{r}
+plot(cars)
+```
