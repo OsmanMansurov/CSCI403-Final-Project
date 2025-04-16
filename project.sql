@@ -18,7 +18,6 @@ CREATE TABLE electric_vehicles (
     "Electric Vehicle Type" TEXT,
     "Clean Alternative Fuel Vehicle (CAFV) Eligibility" TEXT,
     "Electric Range" INT,
-    "Base MSPR" INT,
     "Legislative District" INT,
     "DOL Vehicle ID" BIGINT,
     "Vehicle Location" TEXT,
@@ -40,7 +39,6 @@ CREATE TABLE vehicle_details (
     "Make" TEXT NOT NULL,
     "Electric Vehicle Type" TEXT,
     "Electric Range" INT,
-    "Base MSPR" TEXT
 );
 
 CREATE TABLE vehicle_location (
