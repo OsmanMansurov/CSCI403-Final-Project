@@ -48,7 +48,8 @@ CREATE TABLE district_politics (
 -- (Q2) Load data into the table and clean data (\copy ...)
 
 
-INSERT INTO district_politics VALUES (SELECT District, Party FROM district_elections WHERE Won = "TRUE");
+INSERT INTO district_politics 
+SELECT District, Party FROM district_elections WHERE Won = "TRUE";
 
 -- (Q4) Normalized schemas (CREATE TABLE ...)
 
