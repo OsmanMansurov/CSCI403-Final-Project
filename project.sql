@@ -32,7 +32,7 @@ CREATE TABLE district_elections (
     District TEXT,
     Candidate TEXT,
     Party TEXT,
-    Total Votes INT,
+    Total_Votes INT,
     Won TEXT
 );
 
