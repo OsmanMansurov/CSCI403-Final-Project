@@ -26,7 +26,7 @@ CREATE TABLE electric_vehicles (
     "Electric Utility" TEXT,
     "2020 Census Tract" BIGINT
 );
-\copy electric_vehicles FROM 'data/Electric\ Vehicle\ Data.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
+\copy electric_vehicles FROM 'data/Electric Vehicle Data.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
 
 CREATE TABLE district_elections (
     District TEXT,
