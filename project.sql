@@ -1,6 +1,8 @@
 SET search_path TO group12;
 
 DROP TABLE if exists electric_vehicles;
+DROP TABLE if exists district_elections CASCADE;
+DROP TABLE if exists district_politics CASCADE;
 DROP TABLE if exists details_location CASCADE;
 DROP TABLE if exists vehicle_details CASCADE;
 DROP TABLE if exists vehicle_location CASCADE;
