@@ -1,3 +1,5 @@
+SET search_path TO group12;
+
 DROP TABLE if exists electric_vehicles;
 DROP TABLE if exists details_location CASCADE;
 DROP TABLE if exists vehicle_details CASCADE;
@@ -24,6 +26,7 @@ CREATE TABLE electric_vehicles (
     "Electric Utility" TEXT,
     "2020 Census Tract" BIGINT
 );
+\copy electric_vehicles FROM 'data/Electric\ Vehicle\ Data.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
 
 CREATE TABLE district_elections (
     District TEXT,
@@ -33,6 +36,8 @@ CREATE TABLE district_elections (
     Won TEXT
 );
 
+\copy district_elections FROM 'data/house_candidate.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
+
 CREATE TABLE district_politics (
     District TEXT,
     Party Text
@@ -40,8 +45,7 @@ CREATE TABLE district_politics (
 
 -- (Q2) Load data into the table and clean data (\copy ...)
 
-\copy electric_vehicles FROM 'data/Electric\ Vehicle\ Data.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
-\copy district_elections FROM 'data/house_candidate.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
+
 
 INSERT INTO district_politics VALUES (SELECT District, Party FROM district_elections WHERE Won = "TRUE");
 
