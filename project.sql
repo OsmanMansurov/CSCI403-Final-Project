@@ -38,16 +38,12 @@ CREATE TABLE district_politics (
     Party Text
 );
 
--- (Q2) Load data into the table (\copy ...)
+-- (Q2) Load data into the table and clean data (\copy ...)
 
 \copy electric_vehicles FROM 'data/Electric\ Vehicle\ Data.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
 \copy district_elections FROM 'data/house_candidate.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
 
-INSERT INTO district_politics (
-    
-)
-
-
+INSERT INTO district_politics VALUES (SELECT District, Party FROM district_elections WHERE Won = "TRUE");
 
 -- (Q4) Normalized schemas (CREATE TABLE ...)
 
