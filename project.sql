@@ -46,7 +46,6 @@ CREATE TABLE district_politics (
 -- (Q2) Load data into the table and clean data (\copy ...)
 
 
-
 INSERT INTO district_politics VALUES (SELECT District, Party FROM district_elections WHERE Won = "TRUE");
 
 -- (Q4) Normalized schemas (CREATE TABLE ...)
@@ -92,6 +91,9 @@ WHERE "Model Year"::TEXT ~ '^[0-9]+$';
 UPDATE electric_vehicles
 SET "Electric Range" = CAST(NULLIF(TRIM("Electric Range"::TEXT), '') AS INTEGER)
 WHERE "Electric Range"::TEXT ~ '^[0-9]+$';
+
+DELETE FROM electric_vehicles
+WHERE "Electric Range" = 0;
 
 ALTER TABLE vehicle_location ALTER COLUMN "County" DROP NOT NULL;
 ALTER TABLE vehicle_location ALTER COLUMN "City" DROP NOT NULL;
