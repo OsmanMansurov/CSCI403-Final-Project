@@ -25,9 +25,28 @@ CREATE TABLE electric_vehicles (
     "2020 Census Tract" BIGINT
 );
 
+CREATE TABLE district_elections (
+    District TEXT,
+    Candidate TEXT,
+    Party TEXT,
+    Total Votes INT,
+    Won TEXT
+);
+
+CREATE TABLE district_politics (
+    District TEXT,
+    Party Text
+);
+
 -- (Q2) Load data into the table (\copy ...)
 
 \copy electric_vehicles FROM 'data/Electric\ Vehicle\ Data.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
+\copy district_elections FROM 'data/house_candidate.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
+
+INSERT INTO district_politics (
+    
+)
+
 
 
 -- (Q4) Normalized schemas (CREATE TABLE ...)
