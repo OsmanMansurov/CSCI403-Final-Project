@@ -8,7 +8,7 @@ DROP TABLE if exists vehicle_details CASCADE;
 DROP TABLE if exists vehicle_location CASCADE;
 
 
--- (Q2) Initial Schema (CREATE TABLE ...)
+-- Initial Schemas (CREATE TABLE ...)
 
 CREATE TABLE electric_vehicles (
     "VIN (1-10)" TEXT,
@@ -42,16 +42,30 @@ CREATE TABLE district_elections (
 
 CREATE TABLE district_politics (
     District TEXT,
-    Party Text
+    Party Text,
+    Total_Votes INT
 );
 
--- (Q2) Load data into the table and clean data (\copy ...)
+--Data cleaning
+UPDATE electric_vehicles
+SET "Make" = NULL WHERE TRIM("Make") = '';
+
+UPDATE electric_vehicles
+SET "Model Year" = CAST(NULLIF(TRIM("Model Year"::TEXT), '') AS INTEGER)
+WHERE "Model Year"::TEXT ~ '^[0-9]+$';
+
+UPDATE electric_vehicles
+SET "Electric Range" = CAST(NULLIF(TRIM("Electric Range"::TEXT), '') AS INTEGER)
+WHERE "Electric Range"::TEXT ~ '^[0-9]+$';
+
+DELETE FROM electric_vehicles
+WHERE "Electric Range" = 0;
 
 
 INSERT INTO district_politics 
-SELECT District, Party FROM district_elections WHERE Won = "TRUE";
+SELECT District, Party, Total_Votes FROM district_elections WHERE Won = "TRUE";
 
--- (Q4) Normalized schemas (CREATE TABLE ...)
+--Normalizing into BCNF
 
 CREATE TABLE vehicle_details (
     "VIN (1-10)" TEXT NOT NULL,
@@ -81,23 +95,6 @@ CREATE TABLE details_location (
     "DOL Vehicle ID" TEXT
 );
 
-
--- (Q5) Loading data from the initial table into the normalized tables  (INSERT INTO ... SELECT ...)
-
-UPDATE electric_vehicles
-SET "Make" = NULL WHERE TRIM("Make") = '';
-
-UPDATE electric_vehicles
-SET "Model Year" = CAST(NULLIF(TRIM("Model Year"::TEXT), '') AS INTEGER)
-WHERE "Model Year"::TEXT ~ '^[0-9]+$';
-
-UPDATE electric_vehicles
-SET "Electric Range" = CAST(NULLIF(TRIM("Electric Range"::TEXT), '') AS INTEGER)
-WHERE "Electric Range"::TEXT ~ '^[0-9]+$';
-
-DELETE FROM electric_vehicles
-WHERE "Electric Range" = 0;
-
 ALTER TABLE vehicle_location ALTER COLUMN "County" DROP NOT NULL;
 ALTER TABLE vehicle_location ALTER COLUMN "City" DROP NOT NULL;
 ALTER TABLE vehicle_location ALTER COLUMN "Postal Code" DROP NOT NULL;
@@ -123,7 +120,7 @@ WHERE "VIN (1-10)" IS NOT NULL AND "DOL Vehicle ID" IS NOT NULL;
 
 
 
--- (Q6) Keys and constraints (ALTER TABLE ... ADD CONSTRAINT ...)
+-- Keys and constraints
 
 ALTER TABLE vehicle_details ADD CONSTRAINT pk_vehicle_details PRIMARY KEY ("VIN (1-10)");
 ALTER TABLE vehicle_location ADD CONSTRAINT pk_vehicle_location PRIMARY KEY ("DOL Vehicle ID");
@@ -136,6 +133,9 @@ ALTER TABLE vehicle_details ADD CONSTRAINT chk_model_year CHECK ("Model Year" >=
 ALTER TABLE vehicle_details ADD CONSTRAINT chk_electric_range CHECK ("Electric Range" >= 0);
 
 
+--Everything below this point was part of Chris's original assignment.
+--We can use some of it so I don't want to delete it, but I am commenting it out for organizational purposes
+'''
 -- (Q7) Interesting Queries (SELECT ...)
 
 -- Query 1: Find the top 5 most common electric vehicle models
@@ -192,3 +192,4 @@ JOIN vehicle_location ON vehicle_location."DOL Vehicle ID" = details_location."D
 JOIN vehicle_details ON details_location."VIN (1-10)" = vehicle_details."VIN (1-10)"
 WHERE "Electric Range" IS NOT NULL
 GROUP BY "State";
+'''
