@@ -1,4 +1,5 @@
 SET search_path TO group12;
+SET ROLE group12;
 
 DROP TABLE if exists electric_vehicles;
 DROP TABLE if exists district_elections CASCADE;
