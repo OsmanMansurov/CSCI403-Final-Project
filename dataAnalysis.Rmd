@@ -60,3 +60,7 @@ summary(yearModel)
 model_means = emmeans(yearModel, ~ Model.Year)
 pairs(model_means, adjust = "tukey")
 ```
+
+```{r}
+
+```
