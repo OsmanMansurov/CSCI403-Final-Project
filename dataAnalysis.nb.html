@@ -1754,31 +1754,49 @@ display: none;
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXZEYXRhIDwtIHJlYWQuY3N2KFwiRWxlY3RyaWMgVmVoaWNsZSBEYXRhLmNzdlwiKVxubW9kZWwgPC0gbG0oRWxlY3RyaWMuUmFuZ2UgfiBNb2RlbCwgZGF0YSA9IGV2RGF0YSlcbmBgYCJ9 -->
-<pre class="r"><code>evData &lt;- read.csv(&quot;Electric Vehicle Data.csv&quot;)
-model &lt;- lm(Electric.Range ~ Model, data = evData)</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>First, we can start by checking to see if the electric vehicle type
+results in different electric ranges.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW9kZWwgPC0gbG0oRWxlY3RyaWMuUmFuZ2UgfiBNb2RlbC5ZZWFyLCBkYXRhID0gZXZEYXRhKVxuYW5vdmEobW9kZWwpXG5gYGAifQ== -->
-<pre class="r"><code>model &lt;- lm(Electric.Range ~ Model.Year, data = evData)
-anova(model)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgVmFyaWFuY2UgVGFibGVcblxuUmVzcG9uc2U6IEVsZWN0cmljLlJhbmdlXG4gICAgICAgICAgICAgICBEZiAgICAgU3VtIFNxICAgTWVhbiBTcSBGIHZhbHVlICAgIFByKD5GKSAgICBcbk1vZGVsLlllYXIgICAgICAxICA0NjAyNTI2NTAgNDYwMjUyNjUwICAgODk1OTkgPCAyLjJlLTE2ICoqKlxuUmVzaWR1YWxzICAyMzIyMDEgMTE5Mjc3MTAxMSAgICAgIDUxMzcgICAgICAgICAgICAgICAgICAgICAgXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Variance Table
-
-Response: Electric.Range
-               Df     Sum Sq   Mean Sq F value    Pr(&gt;F)    
-Model.Year      1  460252650 460252650   89599 &lt; 2.2e-16 ***
-Residuals  232201 1192771011      5137                      
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMjFRTVV2RFFCUitUUzh0RGJRVWlxdGtFTkZDQWxVUU4wdXgwa1dvcFMxZHI4blpCdE5MdUZ6VmJ2NEZCMWRIQitrUGNIRFcyYzNOSCtDb2MrTWx2Uk1KQmk3M3ZlL2U5OTczWHU5NHRHK01EQURJQTBJNXlPc0NnajdvbjFpSEFFZ1RRUTRRbEpMN1dpVFZCRURpVk1YUjVNTm1DM05PMk1Kcys4VGh6SFBNSVpsNmprL01uVlo3dUN1enRyditmR0o1MU93c3hzeHovMG51ZHBKc2dISmFHNTRHQU04YkFsZVN1RGw5cmI4c2I1Zk5vNFA3eDBhdCtNdjM2dC92bjZjZlRldnM2KzdoYlN0aldxZDRSaUpwR0VseVEvVzJaVys3dndpSkdwTktnR1lFSzZ4RmJxWndpUVZYdGlxZU9yNFJ2emlPVjFrSGpvOGo1VUNSaG9zNXRzK1owSXNvS3lrR0lmY0NLa1Jhc3U5Q1JweGpHYUk2cDRrVDEzS21jM3BoTmZZeTcvbVFUcEttS2JYK3loSnJmekJhMjlCaUtTOUllWUhRaVVmVmZuUWZqNG12S3J2a1VzS0tXRWk2RHp0a0h1VnFVTUZHTmc4NFZoTERDWHpGcEtQRDZnZTE3L3g1aFFJQUFBPT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Electric.Vehicle.Type"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Battery Electric Vehicle (BEV)","2":"47189","3":"198.22397","4":"72.67119"},{"1":"Plug-in Hybrid Electric Vehicle (PHEV)","2":"48149","3":"31.21336","4":"14.66006"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Next cell is a WIP</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Do we have evidence to show that electric cars have increased in
+average range in 2020 compared to in 2019?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBd3R5aVREbWl1QmlZR0JnWm1CaFlXUmdaZ1V5R1ZoRFE5eDBMUmdZV0ppQUhFWUdGZ1pPRUYwQlZDUU1aTEFBTVM4UUF5WFpId1B4RXdSZjZSQURnMFkwa00wSDRqdGtXY1I3YmoyNjNLSFFMM2I3OURkSDRlSXVHM1hVdVd0dU9yaG9HM0VuMWVpaldjU2FsNWliV2d4a0NJQXRnd2h5K2VhbnBPYm9SYVltRnNIY2t3ZGxzT1NtSnNMWVRNVXBhS1p4RnVXWDY4Rk1CRHV6QVVqOC8vLy9IN3ExeVRtSnhUQnJZWUpjS1lrbGlYcHBSVUQ5UUI2NkZ2YjhncExNL0R5Z0ppWlF3TENoYVdZc1FoTVFLTTBEdVNSRk56bWpOQzliMTlBU1RaNjVJQzhkWkNsWUNBSjRvV3dtSkRZTHhCbE0vNkhhMmFEYTJWTHowalB6VW1IK3lVbE1TczJCbVp5U1dnWmw4Z0VEQkJ3ZWVnVkZtWGtsTUk4Q1JZdjFTdkpMRW1GYXVKTHpjMkFpWUs4ei9BTUE1VXpnZ1M0Q0FBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Model.Year"],"name":[1],"type":["int"],"align":["right"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019","2":"8898","3":"209.7616","4":"41.38416"},{"1":"2020","2":"10331","3":"276.8979","4":"40.33746"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgRGYgICBTdW0gU3EgIE1lYW4gU3EgRiB2YWx1ZSBQcig+RikgICAgXG5Nb2RlbC5ZZWFyICAgICAgMSAyMTU0NzI2NyAyMTU0NzI2NyAgIDEyOTI4IDwyZS0xNiAqKipcblJlc2lkdWFscyAgIDE5MjI3IDMyMDQ1NDkzICAgICAxNjY3ICAgICAgICAgICAgICAgICAgIFxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG4gY29udHJhc3QgICAgICAgICAgICAgICAgICAgICAgICBlc3RpbWF0ZSAgIFNFICAgIGRmICB0LnJhdGlvIHAudmFsdWVcbiBNb2RlbC5ZZWFyMjAxOSAtIE1vZGVsLlllYXIyMDIwICAgIC02Ny4xIDAuNTkgMTkyMjcgLTExMy43MDIgIDwuMDAwMVxuIn0= -->
+<pre><code>               Df   Sum Sq  Mean Sq F value Pr(&gt;F)    
+Model.Year      1 21547267 21547267   12928 &lt;2e-16 ***
+Residuals   19227 32045493     1667                   
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</code></pre>
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+ contrast                        estimate   SE    df  t.ratio p.value
+ Model.Year2019 - Model.Year2020    -67.1 0.59 19227 -113.702  &lt;.0001</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ1NDSTQwMyBBbmFseXNpcyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CmV2RGF0YSA8LSByZWFkLmNzdigiRWxlY3RyaWMgVmVoaWNsZSBEYXRhLmNzdiIpCmBgYAoKYGBge3J9Cm1vZGVsIDwtIGxtKEVsZWN0cmljLlJhbmdlIH4gTW9kZWwuWWVhciwgZGF0YSA9IGV2RGF0YSkKYW5vdmEobW9kZWwpCmBgYA==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ1NDSTQwMyBBbmFseXNpcyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CmxpYnJhcnkoZW1tZWFucykKbGlicmFyeShTdGF0MkRhdGEpCmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KG1vc2FpYykKbGlicmFyeShnZ2Zvcm11bGEpCmxpYnJhcnkoZHBseXIpCgprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IEYpCmV2RGF0YSA8LSByZWFkLmNzdigiZGF0YS9FbGVjdHJpYyBWZWhpY2xlIERhdGEuY3N2IikKYGBgCgpGaXJzdCwgd2UgY2FuIHN0YXJ0IGJ5IGNoZWNraW5nIHRvIHNlZSBpZiB0aGUgZWxlY3RyaWMgdmVoaWNsZSB0eXBlIHJlc3VsdHMgaW4gZGlmZmVyZW50IGVsZWN0cmljIHJhbmdlcy4KCmBgYHtyfQojIFN0YXJ0IGJ5IGRlbGV0aW5nIGFsbCByb3dzIHdpdGggYW4gZWxlY3RyaWMgcmFuZ2Ugb2YgemVybwpldkRhdGEgPC0gZmlsdGVyKGV2RGF0YSwgRWxlY3RyaWMuUmFuZ2UgIT0gMCkKCm1vZGVsIDwtIGFvdihFbGVjdHJpYy5SYW5nZSB+IEVsZWN0cmljLlZlaGljbGUuVHlwZSwgZGF0YSA9IGV2RGF0YSkKCmRmX3N1bW1hcnkgPC0gZXZEYXRhICU+JQogIGdyb3VwX2J5KEVsZWN0cmljLlZlaGljbGUuVHlwZSkgJT4lCiAgc3VtbWFyaXplKAogICAgbiA9IG4oKSwKICAgIG1lYW4gPSBtZWFuKEVsZWN0cmljLlJhbmdlLCBuYS5ybSA9IFRSVUUpLAogICAgc2QgPSBzZChFbGVjdHJpYy5SYW5nZSwgbmEucm0gPSBUUlVFKQogICkKZGZfc3VtbWFyeQpgYGAKCk5leHQgY2VsbCBpcyBhIFdJUAoKYGBge3J9CiMgU3RhcnQgYnkgZmlsdGVyaW5nIHRoZSBkYXRhIHRvIG9ubHkgaW5jbHVkZSByb3dzIHdpdGggdGhlIEJhdHRlcnkgRWxlY3RyaWMgVmVoaWNsZSAoQkVWKSBjb2x1bW4gdmFsdWUKb25seUVsZWN0cmljIDwtIGZpbHRlcihldkRhdGEsIEVsZWN0cmljLlZlaGljbGUuVHlwZSA9PSAiQmF0dGVyeSBFbGVjdHJpYyBWZWhpY2xlIChCRVYpIikKIyBDcmVhdGUgYSBuZXcgZGF0YWZyYW1lIHcKdGVzbGFNb2RlbCA8LSBhb3YoRWxlY3RyaWMuUmFuZ2UgfiBNYWtlLCBkYXRhID0gb25seUVsZWN0cmljKQoKYGBgCgpEbyB3ZSBoYXZlIGV2aWRlbmNlIHRvIHNob3cgdGhhdCBlbGVjdHJpYyBjYXJzIGhhdmUgaW5jcmVhc2VkIGluIGF2ZXJhZ2UgcmFuZ2UgaW4gMjAyMCBjb21wYXJlZCB0byBpbiAyMDE5PwoKYGBge3J9CnllYXJFbGVjdHJpYyA8LSBmaWx0ZXIob25seUVsZWN0cmljLCBNb2RlbC5ZZWFyID09IDIwMjAgfCBNb2RlbC5ZZWFyID09IDIwMTkpCnllYXJNb2RlbCA8LSBhb3YoRWxlY3RyaWMuUmFuZ2UgfiBNb2RlbC5ZZWFyLCBkYXRhID0geWVhckVsZWN0cmljKQpkZl9zdW1tYXJ5IDwtIHllYXJFbGVjdHJpYyAlPiUKICBncm91cF9ieShNb2RlbC5ZZWFyKSAlPiUKICBzdW1tYXJpemUoCiAgICBuID0gbigpLAogICAgbWVhbiA9IG1lYW4oRWxlY3RyaWMuUmFuZ2UsIG5hLnJtID0gVFJVRSksCiAgICBzZCA9IHNkKEVsZWN0cmljLlJhbmdlLCBuYS5ybSA9IFRSVUUpCiAgKQpkZl9zdW1tYXJ5CnN1bW1hcnkoeWVhck1vZGVsKQptb2RlbF9tZWFucyA9IGVtbWVhbnMoeWVhck1vZGVsLCB+IE1vZGVsLlllYXIpCnBhaXJzKG1vZGVsX21lYW5zLCBhZGp1c3QgPSAidHVrZXkiKQpgYGA=</div>
 
 
 

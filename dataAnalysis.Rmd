@@ -4,10 +4,59 @@ output: html_notebook
 ---
 
 ```{r}
-evData <- read.csv("Electric Vehicle Data.csv")
+library(emmeans)
+library(Stat2Data)
+library(tidyverse)
+library(mosaic)
+library(ggformula)
+library(dplyr)
+
+knitr::opts_chunk$set(echo = F)
+evData <- read.csv("data/Electric Vehicle Data.csv")
 ```
 
+First, we can start by checking to see if the electric vehicle type results in different electric ranges.
+
 ```{r}
-model <- lm(Electric.Range ~ Model.Year, data = evData)
-anova(model)
+# Start by deleting all rows with an electric range of zero
+evData <- filter(evData, Electric.Range != 0)
+
+model <- aov(Electric.Range ~ Electric.Vehicle.Type, data = evData)
+
+df_summary <- evData %>%
+  group_by(Electric.Vehicle.Type) %>%
+  summarize(
+    n = n(),
+    mean = mean(Electric.Range, na.rm = TRUE),
+    sd = sd(Electric.Range, na.rm = TRUE)
+  )
+df_summary
+```
+
+Next cell is a WIP
+
+```{r}
+# Start by filtering the data to only include rows with the Battery Electric Vehicle (BEV) column value
+onlyElectric <- filter(evData, Electric.Vehicle.Type == "Battery Electric Vehicle (BEV)")
+# Create a new dataframe w
+teslaModel <- aov(Electric.Range ~ Make, data = onlyElectric)
+
+```
+
+Do we have evidence to show that electric cars have increased in average range in 2020 compared to in 2019?
+
+```{r}
+yearElectric <- filter(onlyElectric, Model.Year == 2020 | Model.Year == 2019)
+yearModel <- aov(Electric.Range ~ Model.Year, data = yearElectric)
+df_summary <- yearElectric %>%
+  group_by(Model.Year) %>%
+  summarize(
+    n = n(),
+    mean = mean(Electric.Range, na.rm = TRUE),
+    sd = sd(Electric.Range, na.rm = TRUE)
+  )
+df_summary
+summary(yearModel)
+model_means = emmeans(yearModel, ~ Model.Year)
+pairs(model_means, adjust = "tukey")
 ```
