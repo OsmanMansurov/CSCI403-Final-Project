@@ -1754,13 +1754,60 @@ display: none;
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoi4pSA4pSAIEF0dGFjaGluZyBjb3JlIHRpZHl2ZXJzZSBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDIuMC4wIOKUgOKUgFxu4pyUIGRwbHlyICAgICAxLjEuNCAgICAg4pyUIHJlYWRyICAgICAyLjEuNVxu4pyUIGZvcmNhdHMgICAxLjAuMCAgICAg4pyUIHN0cmluZ3IgICAxLjUuMVxu4pyUIGdncGxvdDIgICAzLjUuMSAgICAg4pyUIHRpYmJsZSAgICAzLjIuMVxu4pyUIGx1YnJpZGF0ZSAxLjkuMyAgICAg4pyUIHRpZHlyICAgICAxLjMuMVxu4pyUIHB1cnJyICAgICAxLjAuMiAgICAgXG7ilIDilIAgQ29uZmxpY3RzIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG7inJYgZHBseXI6OmZpbHRlcigpIG1hc2tzIHN0YXRzOjpmaWx0ZXIoKVxu4pyWIGRwbHlyOjpsYWcoKSAgICBtYXNrcyBzdGF0czo6bGFnKClcbuKEuSBVc2UgdGhlIFx1MDAxYl04OztodHRwOi8vY29uZmxpY3RlZC5yLWxpYi5vcmcvXHUwMDA3Y29uZmxpY3RlZCBwYWNrYWdlXHUwMDFiXTg7O1x1MDAwNyB0byBmb3JjZSBhbGwgY29uZmxpY3RzIHRvIGJlY29tZSBlcnJvcnNcbiJ9 -->
+<pre><code>── Attaching core tidyverse packages ─────────────────────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ───────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2Qgb3ZlcndyaXR0ZW4gYnkgJ21vc2FpYyc6XG4gIG1ldGhvZCAgICAgICAgICAgICAgICAgICAgICAgICAgIGZyb20gICBcbiAgZm9ydGlmeS5TcGF0aWFsUG9seWdvbnNEYXRhRnJhbWUgZ2dwbG90MlxuXG5UaGUgJ21vc2FpYycgcGFja2FnZSBtYXNrcyBzZXZlcmFsIGZ1bmN0aW9ucyBmcm9tIGNvcmUgcGFja2FnZXMgaW4gb3JkZXIgdG8gYWRkIFxuYWRkaXRpb25hbCBmZWF0dXJlcy4gIFRoZSBvcmlnaW5hbCBiZWhhdmlvciBvZiB0aGVzZSBmdW5jdGlvbnMgc2hvdWxkIG5vdCBiZSBhZmZlY3RlZCBieSB0aGlzLlxuXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYbW9zYWlj4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6TWF0cml44oCZOlxuXG4gICAgbWVhblxuXG5UaGUgZm9sbG93aW5nIG9iamVjdHMgYXJlIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6ZHBseXLigJk6XG5cbiAgICBjb3VudCwgZG8sIHRhbGx5XG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6cHVycnLigJk6XG5cbiAgICBjcm9zc1xuXG5UaGUgZm9sbG93aW5nIG9iamVjdCBpcyBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmdncGxvdDLigJk6XG5cbiAgICBzdGF0XG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0cyBhcmUgbWFza2VkIGZyb20g4oCYcGFja2FnZTpzdGF0c+KAmTpcblxuICAgIGJpbm9tLnRlc3QsIGNvciwgY29yLnRlc3QsIGNvdiwgZml2ZW51bSwgSVFSLCBtZWRpYW4sIHByb3AudGVzdCwgcXVhbnRpbGUsIHNkLCB0LnRlc3QsXG4gICAgdmFyXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0cyBhcmUgbWFza2VkIGZyb20g4oCYcGFja2FnZTpiYXNl4oCZOlxuXG4gICAgbWF4LCBtZWFuLCBtaW4sIHByb2QsIHJhbmdlLCBzYW1wbGUsIHN1bVxuIn0= -->
+<pre><code>Registered S3 method overwritten by &#39;mosaic&#39;:
+  method                           from   
+  fortify.SpatialPolygonsDataFrame ggplot2
+
+The &#39;mosaic&#39; package masks several functions from core packages in order to add 
+additional features.  The original behavior of these functions should not be affected by this.
+
+Attaching package: ‘mosaic’
+
+The following object is masked from ‘package:Matrix’:
+
+    mean
+
+The following objects are masked from ‘package:dplyr’:
+
+    count, do, tally
+
+The following object is masked from ‘package:purrr’:
+
+    cross
+
+The following object is masked from ‘package:ggplot2’:
+
+    stat
+
+The following objects are masked from ‘package:stats’:
+
+    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test, quantile, sd, t.test,
+    var
+
+The following objects are masked from ‘package:base’:
+
+    max, mean, min, prod, range, sample, sum</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>First, we can start by checking to see if the electric vehicle type
 results in different electric ranges.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMjFRTVV2RFFCUitUUzh0RGJRVWlxdGtFTkZDQWxVUU4wdXgwa1dvcFMxZHI4blpCdE5MdUZ6VmJ2NEZCMWRIQitrUGNIRFcyYzNOSCtDb2MrTWx2Uk1KQmk3M3ZlL2U5OTczWHU5NHRHK01EQURJQTBJNXlPc0NnajdvbjFpSEFFZ1RRUTRRbEpMN1dpVFZCRURpVk1YUjVNTm1DM05PMk1Kcys4VGh6SFBNSVpsNmprL01uVlo3dUN1enRyditmR0o1MU93c3hzeHovMG51ZHBKc2dISmFHNTRHQU04YkFsZVN1RGw5cmI4c2I1Zk5vNFA3eDBhdCtNdjM2dC92bjZjZlRldnM2KzdoYlN0aldxZDRSaUpwR0VseVEvVzJaVys3dndpSkdwTktnR1lFSzZ4RmJxWndpUVZYdGlxZU9yNFJ2emlPVjFrSGpvOGo1VUNSaG9zNXRzK1owSXNvS3lrR0lmY0NLa1Jhc3U5Q1JweGpHYUk2cDRrVDEzS21jM3BoTmZZeTcvbVFUcEttS2JYK3loSnJmekJhMjlCaUtTOUllWUhRaVVmVmZuUWZqNG12S3J2a1VzS0tXRWk2RHp0a0h1VnFVTUZHTmc4NFZoTERDWHpGcEtQRDZnZTE3L3g1aFFJQUFBPT0ifQ== -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMjFRTVV2RFFCUitUUzh0RGJRS3BhdGtFTkZDQWlxSW02Vlk2U0xVMHBhdTErUnNEOU5MU0s1cU4vK0NnNnVqZy9RSE9EanI3T2JtRDNEVXVmR1Mzb2tFQTVmNzNuZnZlKzk3cjNzODNEZUdCZ0RrQWFFYzVIVUJRZS8zVHF4REFLU0pJQWNJU3NsOUxaS3FBaUJ4MXNYUjVNTkdFM05Pd3JuWjhvakRRK3FZQXpLaGprZk03V1pyc0NPenRqcmViR3hSWnJibm81QzYveVIzMmtrMlFEbXREVTk5Z09lYXdKVWtia3hlNnkrTDIwWGo2T0QrY2JkYS9PVzc5ZS8zejlPUGhuWDJkZmZ3dHBreHJUTThKWkUwakNSWlU3MXQyZHZ1elFPaXhtUVNvQ25CQ211Um15bGNDdjByV3hWUEhkK0lYeHpIeTZ3RHg4T1JjcUJJdzhVYzIrZWgwSXNvS3luNkFhYytFeUl0MlhjaEk4NkZHV0p0eGhJbnJ1Vk1adXpDMnNzODV3TTJUbnFtMU9vclM2ejl3V2psUW91bHZDRGxCY0xHbEtuMTZCNGVFVTlWZHNtbGhCV3hqM1FkZGhCU3h0V2NnbzFzN25Pc0pJYmplNHBKSjRmbEQwMk5CaXFFQWdBQSJ9 -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Electric.Vehicle.Type"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Battery Electric Vehicle (BEV)","2":"47189","3":"198.22397","4":"72.67119"},{"1":"Plug-in Hybrid Electric Vehicle (PHEV)","2":"48149","3":"31.21336","4":"14.66006"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
@@ -1778,7 +1825,7 @@ results in different electric ranges.</p>
 average range in 2020 compared to in 2019?</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBd3R5aVREbWl1QmlZR0JnWm1CaFlXUmdaZ1V5R1ZoRFE5eDBMUmdZV0ppQUhFWUdGZ1pPRUYwQlZDUU1aTEFBTVM4UUF5WFpId1B4RXdSZjZSQURnMFkwa00wSDRqdGtXY1I3YmoyNjNLSFFMM2I3OURkSDRlSXVHM1hVdVd0dU9yaG9HM0VuMWVpaldjU2FsNWliV2d4a0NJQXRnd2h5K2VhbnBPYm9SYVltRnNIY2t3ZGxzT1NtSnNMWVRNVXBhS1p4RnVXWDY4Rk1CRHV6QVVqOC8vLy9IN3ExeVRtSnhUQnJZWUpjS1lrbGlYcHBSVUQ5UUI2NkZ2YjhncExNL0R5Z0ppWlF3TENoYVdZc1FoTVFLTTBEdVNSRk56bWpOQzliMTlBU1RaNjVJQzhkWkNsWUNBSjRvV3dtSkRZTHhCbE0vNkhhMmFEYTJWTHowalB6VW1IK3lVbE1TczJCbVp5U1dnWmw4Z0VEQkJ3ZWVnVkZtWGtsTUk4Q1JZdjFTdkpMRW1GYXVKTHpjMkFpWUs4ei9BTUE1VXpnZ1M0Q0FBQT0ifQ== -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBd3R5aVREbWl1QmlZR0JnWm1CaFlXUmdaZ1V5R1ZoRFE5eDBMUmdZV0ppQUhFWUdGZ1pPRUYwQlZDUU1aTEFBTVM4UUF5WFpId1B4RXdSZjZSQURnMFkwa00wSDRqdGtXY1I3YmoyNjNLSFFMM2I3OURkSDRlSXVHM1hVdVd0dU9yaG9HM0VuMWVpaldjU2FsNWliV2d4a0NJQXRnd2h5K2VhbnBPYm9SYVltRnNIY2t3ZGxzT1NtSnNMWVRNVXBhS1p4RnVXWDY4Rk1CRHV6QVVqOC8vLy9IN3ExeVRtSnhUQnJZWUpjS1lrbGlYcHBSVUQ5UUI2NkZ2YjhncExNL0R5Z0ppWlF3TENoYVdZc1FoUGdMODBEdVNSRk56bWpOQzliMXdSTm1ya2dMeDFrSjFnSUFuaWhiQ1lrTmd2RUZVei9vZHJab05yWlV2UFNNL05TWWQ3SlNVeEt6WUdabkpKYUJtWHlBY01ESEJ4NkJVV1plU1V3ZndKRmkvVks4a3NTWVZxNGt2TnpZQ0pnbnpQOEF3RHQ3K2lDTFFJQUFBPT0ifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Model.Year"],"name":[1],"type":["int"],"align":["right"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019","2":"8898","3":"209.7616","4":"41.38416"},{"1":"2020","2":"10331","3":"276.8979","4":"40.33746"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
