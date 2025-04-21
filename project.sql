@@ -64,7 +64,7 @@ WHERE "Electric Range" = 0;
 
 
 INSERT INTO district_politics 
-SELECT District, Party, Total_Votes FROM district_elections WHERE Won = "TRUE";
+SELECT district, party, total_votes FROM district_elections WHERE won LIKE 'True';
 
 --Normalizing into BCNF
 
@@ -74,7 +74,7 @@ CREATE TABLE vehicle_details (
     "Model Year" INT NOT NULL,
     "Make" TEXT NOT NULL,
     "Electric Vehicle Type" TEXT,
-    "Electric Range" INT,
+    "Electric Range" INT
 );
 
 CREATE TABLE vehicle_location (
@@ -100,7 +100,7 @@ ALTER TABLE vehicle_location ALTER COLUMN "County" DROP NOT NULL;
 ALTER TABLE vehicle_location ALTER COLUMN "City" DROP NOT NULL;
 ALTER TABLE vehicle_location ALTER COLUMN "Postal Code" DROP NOT NULL;
 
-INSERT INTO vehicle_details ("VIN (1-10)", "Model", "Model Year", "Make", "Electric Vehicle Type", "Electric Range")
+INSERT INTO vehicle_details
 SELECT DISTINCT "VIN (1-10)", "Model", "Model Year", "Make", "Electric Vehicle Type", "Electric Range"
 FROM electric_vehicles
 WHERE "VIN (1-10)" IS NOT NULL;
@@ -136,7 +136,7 @@ ALTER TABLE vehicle_details ADD CONSTRAINT chk_electric_range CHECK ("Electric R
 
 --Everything below this point was part of Chris's original assignment.
 --We can use some of it so I don't want to delete it, but I am commenting it out for organizational purposes
-'''
+/*
 -- (Q7) Interesting Queries (SELECT ...)
 
 -- Query 1: Find the top 5 most common electric vehicle models
@@ -193,4 +193,4 @@ JOIN vehicle_location ON vehicle_location."DOL Vehicle ID" = details_location."D
 JOIN vehicle_details ON details_location."VIN (1-10)" = vehicle_details."VIN (1-10)"
 WHERE "Electric Range" IS NOT NULL
 GROUP BY "State";
-'''
+*/
