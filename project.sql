@@ -133,6 +133,13 @@ ALTER TABLE details_location ADD CONSTRAINT fk_details_location_dol FOREIGN KEY 
 ALTER TABLE vehicle_details ADD CONSTRAINT chk_model_year CHECK ("Model Year" >= 1900 AND "Model Year" <= EXTRACT(YEAR FROM CURRENT_DATE));
 ALTER TABLE vehicle_details ADD CONSTRAINT chk_electric_range CHECK ("Electric Range" >= 0);
 
+--Interesting queries
+--Query1 (Aidan)
+SELECT DISTINCT "Make", "Model", AVG("Electric Range") as "Avg_Range"
+FROM vehicle_details
+GROUP BY "Make", "Model"
+ORDER BY "Make", "Model";
+
 
 --Everything below this point was part of Chris's original assignment.
 --We can use some of it so I don't want to delete it, but I am commenting it out for organizational purposes
