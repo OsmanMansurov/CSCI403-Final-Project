@@ -62,5 +62,6 @@ pairs(model_means, adjust = "tukey")
 ```
 
 ```{r}
-
+length(filter(evData, Model.Year == 2020)$Electric.Range)
+hist(evData$Model.Year, breaks=seq(1999, 2026, by = 1))
 ```
