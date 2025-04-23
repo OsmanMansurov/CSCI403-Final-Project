@@ -133,6 +133,44 @@ ALTER TABLE details_location ADD CONSTRAINT fk_details_location_dol FOREIGN KEY 
 ALTER TABLE vehicle_details ADD CONSTRAINT chk_model_year CHECK ("Model Year" >= 1900 AND "Model Year" <= EXTRACT(YEAR FROM CURRENT_DATE));
 ALTER TABLE vehicle_details ADD CONSTRAINT chk_electric_range CHECK ("Electric Range" >= 0);
 
+--Import political data
+DROP TABLE IF EXISTS term_data;
+CREATE TABLE term_data (
+    "id" TEXT,
+    "name" TEXT,
+    "sort_name" TEXT,
+    "email" TEXT,
+    "twitter" TEXT,
+    "facebook" TEXT,
+    "group" TEXT,
+    "group_id" TEXT,
+    "area_id" TEXT,
+    "area" TEXT,
+    "chamber" TEXT,
+    "term" TEXT,
+    "start_date" TEXT,
+    "end_date" TEXT,
+    "image" TEXT,
+    "gender" TEXT,
+    "wikidata" TEXT,
+    "wikidata_group" TEXT,
+    "wikidata_area" TEXT
+);
+\copy term_data FROM 'data/term-116.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
+
+DROP TABLE IF EXISTS district_data;
+CREATE TABLE district_data(
+    "group_id" TEXT,
+    "State" TEXT,
+    "Legislative District" INTEGER
+);
+INSERT INTO district_data (group_id, "State", "Legislative District")
+SELECT
+    group_id,
+    SUBSTR(area_id, 1, 2),
+    CAST(SUBSTR(area_id, 4) AS INTEGER)
+FROM term_data;
+
 --Interesting queries
 --Query1 (Aidan)
 SELECT DISTINCT "Make", "Model", AVG("Electric Range") as "Avg_Range"
