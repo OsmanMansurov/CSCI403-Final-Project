@@ -15,6 +15,7 @@ library(dplyr)
 
 knitr::opts_chunk$set(echo = F)
 evData <- read.csv("data/Electric Vehicle Data.csv")
+legData <- read.csv("data/clean_legislative.csv")
 ```
 
 First, we can start by checking to see if the electric vehicle type results in different electric ranges.
@@ -64,6 +65,18 @@ pairs(model_means, adjust = "tukey")
 ```{r}
 #length(filter(evData, Model.Year == 2020)$Electric.Range)
 #hist(evData$Model.Year, breaks=seq(1999, 2026, by = 1))
-# The big question: do we have evidence to show that the leading political party in a legislative district results in fewer or more electric cars compared to other political parties?
 
+# The big question: do we have evidence to show that the leading political party in a legislative district results in fewer or more electric cars compared to other political parties?
+legModel <- aov(total_votes ~ party, data = legData)
+df_summary <- legData %>%
+  group_by(party) %>%
+  summarize(
+    n = n(),
+    mean = mean(total_votes, na.rm = TRUE),
+    sd = sd(total_votes, na.rm = TRUE)
+  )
+df_summary
+summary(legModel)
+model_means = emmeans(legModel, ~ party)
+pairs(model_means, adjust = "tukey")
 ```

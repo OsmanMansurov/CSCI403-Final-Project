@@ -1754,39 +1754,13 @@ display: none;
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShlbW1lYW5zKVxubGlicmFyeShTdGF0MkRhdGEpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkobW9zYWljKVxubGlicmFyeShnZ2Zvcm11bGEpXG5saWJyYXJ5KGRwbHlyKVxuXG5rbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IEYpXG5ldkRhdGEgPC0gcmVhZC5jc3YoXCJkYXRhL0VsZWN0cmljIFZlaGljbGUgRGF0YS5jc3ZcIilcbmBgYCJ9 -->
-<pre class="r"><code>library(emmeans)
-library(Stat2Data)
-library(tidyverse)
-library(mosaic)
-library(ggformula)
-library(dplyr)
-
-knitr::opts_chunk$set(echo = F)
-evData &lt;- read.csv(&quot;data/Electric Vehicle Data.csv&quot;)</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>First, we can start by checking to see if the electric vehicle type
 results in different electric ranges.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBTdGFydCBieSBkZWxldGluZyBhbGwgcm93cyB3aXRoIGFuIGVsZWN0cmljIHJhbmdlIG9mIHplcm9cbmV2RGF0YSA8LSBmaWx0ZXIoZXZEYXRhLCBFbGVjdHJpYy5SYW5nZSAhPSAwKVxuXG5tb2RlbCA8LSBhb3YoRWxlY3RyaWMuUmFuZ2UgfiBFbGVjdHJpYy5WZWhpY2xlLlR5cGUsIGRhdGEgPSBldkRhdGEpXG5cbmRmX3N1bW1hcnkgPC0gZXZEYXRhICU+JVxuICBncm91cF9ieShFbGVjdHJpYy5WZWhpY2xlLlR5cGUpICU+JVxuICBzdW1tYXJpemUoXG4gICAgbiA9IG4oKSxcbiAgICBtZWFuID0gbWVhbihFbGVjdHJpYy5SYW5nZSwgbmEucm0gPSBUUlVFKSxcbiAgICBzZCA9IHNkKEVsZWN0cmljLlJhbmdlLCBuYS5ybSA9IFRSVUUpXG4gIClcbmRmX3N1bW1hcnlcbmBgYCJ9 -->
-<pre class="r"><code># Start by deleting all rows with an electric range of zero
-evData &lt;- filter(evData, Electric.Range != 0)
-
-model &lt;- aov(Electric.Range ~ Electric.Vehicle.Type, data = evData)
-
-df_summary &lt;- evData %&gt;%
-  group_by(Electric.Vehicle.Type) %&gt;%
-  summarize(
-    n = n(),
-    mean = mean(Electric.Range, na.rm = TRUE),
-    sd = sd(Electric.Range, na.rm = TRUE)
-  )
-df_summary</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMjFRTVV2RFFCUitUUzh0RGJRS3BhdGtFTkZDQWlxSW02Vlk2U0xVMHBhdTErUnNEOU5MU0s1cU4vK0NnNnVqZy9RSE9EanI3T2JtRDNEVXVmR1Mzb2tFQTVmNzNuZnZlKzk3cjNzODNEZUdCZ0RrQWFFYzVIVUJRZS8zVHF4REFLU0pJQWNJU3NsOUxaS3FBaUJ4MXNYUjVNTkdFM05Pd3JuWjhvakRRK3FZQXpLaGprZk03V1pyc0NPenRqcmViR3hSWnJibm81QzYveVIzMmtrMlFEbXREVTk5Z09lYXdKVWtia3hlNnkrTDIwWGo2T0QrY2JkYS9PVzc5ZS8zejlPUGhuWDJkZmZ3dHBreHJUTThKWkUwakNSWlU3MXQyZHZ1elFPaXhtUVNvQ25CQ211Um15bGNDdjByV3hWUEhkK0lYeHpIeTZ3RHg4T1JjcUJJdzhVYzIrZWgwSXNvS3luNkFhYytFeUl0MlhjaEk4NkZHV0p0eGhJbnJ1Vk1adXpDMnNzODV3TTJUbnFtMU9vclM2ejl3V2psUW91bHZDRGxCY0xHbEtuMTZCNGVFVTlWZHNtbGhCV3hqM1FkZGhCU3h0V2NnbzFzN25Pc0pJYmplNHBKSjRmbEQwMk5CaXFFQWdBQSJ9 -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMjFRTVV2RFFCUitUUzh0RGJRVWlxdGtFTkZDZ2tVUU4wdXgwa1dvcFMxZHI4blpCdE5MdUZ6VmJ2NEZCMWRIQitrUGNIRFcyYzNOSCtDb2MrTWx2Uk1KQmk3M3ZlL2U5OTczWHU5NHRHK01EQURJQTBJNXlPc0NnajdvbjFpSEFFZ1RRUTRRbEpMN1dpVFZCRURpVk1YUjVNTm1DM05PMk1Kcys4VGh6SFBNSVpsNmprL01uVlo3dUN1enRyditmR0o1MU93c3hzeHovMG51ZHBKc2dISmFHNTRHQU04YkFsZVN1RGw5cmI4c2I1Zk5vNFA3eDBhdCtNdjM2dC92bjZjZlRldnM2KzdoYlN0aldxZDRSaUpwR0VseVEvVzJaVys3dndpSkdwTktnR1lFSzZ4RmJxWndpUVZYdGlxZU9yNFJ2emlPVjFrSGpvOGo1VUNSaG9zNXRzK1owSXNvS3lrR0lmY0NLa1Jhc3U5Q1JweGpHYUk2cDRrVDEzS21jM3BoTmZZeTcvbVFUcEttS2JYK3loSnJmekJhMjlCaUtTOUllWUhRaVVmVmZuUWZqNG12S3J2a1VzS0tXRWk2RHp0a0h1VnFVTUZHTmc4NFZoTERDWHpGcEtQRDZnY1BqOHZOaFFJQUFBPT0ifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Electric.Vehicle.Type"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Battery Electric Vehicle (BEV)","2":"47189","3":"198.22397","4":"72.67119"},{"1":"Plug-in Hybrid Electric Vehicle (PHEV)","2":"48149","3":"31.21336","4":"14.66006"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
@@ -1797,67 +1771,35 @@ df_summary</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBTdGFydCBieSBmaWx0ZXJpbmcgdGhlIGRhdGEgdG8gb25seSBpbmNsdWRlIHJvd3Mgd2l0aCB0aGUgQmF0dGVyeSBFbGVjdHJpYyBWZWhpY2xlIChCRVYpIGNvbHVtbiB2YWx1ZVxub25seUVsZWN0cmljIDwtIGZpbHRlcihldkRhdGEsIEVsZWN0cmljLlZlaGljbGUuVHlwZSA9PSBcIkJhdHRlcnkgRWxlY3RyaWMgVmVoaWNsZSAoQkVWKVwiKVxuIyBDcmVhdGUgYSBuZXcgZGF0YWZyYW1lIHdcbnRlc2xhTW9kZWwgPC0gYW92KEVsZWN0cmljLlJhbmdlIH4gTWFrZSwgZGF0YSA9IG9ubHlFbGVjdHJpYylcblxuYGBgIn0= -->
-<pre class="r"><code># Start by filtering the data to only include rows with the Battery Electric Vehicle (BEV) column value
-onlyElectric &lt;- filter(evData, Electric.Vehicle.Type == &quot;Battery Electric Vehicle (BEV)&quot;)
-# Create a new dataframe w
-teslaModel &lt;- aov(Electric.Range ~ Make, data = onlyElectric)
-</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Do we have evidence to show that electric cars have increased in
 average range in 2020 compared to in 2019?</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueWVhckVsZWN0cmljIDwtIGZpbHRlcihvbmx5RWxlY3RyaWMsIE1vZGVsLlllYXIgPT0gMjAyMCB8IE1vZGVsLlllYXIgPT0gMjAxOSlcbnllYXJNb2RlbCA8LSBhb3YoRWxlY3RyaWMuUmFuZ2UgfiBNb2RlbC5ZZWFyLCBkYXRhID0geWVhckVsZWN0cmljKVxuZGZfc3VtbWFyeSA8LSB5ZWFyRWxlY3RyaWMgJT4lXG4gIGdyb3VwX2J5KE1vZGVsLlllYXIpICU+JVxuICBzdW1tYXJpemUoXG4gICAgbiA9IG4oKSxcbiAgICBtZWFuID0gbWVhbihFbGVjdHJpYy5SYW5nZSwgbmEucm0gPSBUUlVFKSxcbiAgICBzZCA9IHNkKEVsZWN0cmljLlJhbmdlLCBuYS5ybSA9IFRSVUUpXG4gIClcbmRmX3N1bW1hcnlcbmBgYCJ9 -->
-<pre class="r"><code>yearElectric &lt;- filter(onlyElectric, Model.Year == 2020 | Model.Year == 2019)
-yearModel &lt;- aov(Electric.Range ~ Model.Year, data = yearElectric)
-df_summary &lt;- yearElectric %&gt;%
-  group_by(Model.Year) %&gt;%
-  summarize(
-    n = n(),
-    mean = mean(Electric.Range, na.rm = TRUE),
-    sd = sd(Electric.Range, na.rm = TRUE)
-  )
-df_summary</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBd3R5aVREbWl1QmlZR0JnWm1CaFlXUmdaZ1V5R1ZoRFE5eDBMUmdZV0ppQUhFWUdGZ1pPRUYwQlZDUU1aTEFBTVM4UUF5WFpId1B4RXdSZjZSQURnMFkwa00wSDRqdGtXY1I3YmoyNjNLSFFMM2I3OURkSDRlSXVHM1hVdVd0dU9yaG9HM0VuMWVpaldjU2FsNWliV2d4a0NJQXRnd2h5K2VhbnBPYm9SYVltRnNIY2t3ZGxzT1NtSnNMWVRNVXBhS1p4RnVXWDY4Rk1CRHV6QVVqOC8vLy9IN3ExeVRtSnhUQnJZWUpjS1lrbGlYcHBSVUQ5UUI2NkZ2YjhncExNL0R5Z0ppWlF3TENoYVdZc1FoUGdMODBEdVNSRk56bWpOQzliMXdSTm1ya2dMeDFrSjFnSUFuaWhiQ1lrTmd2RUZVei9vZHJab05yWlV2UFNNL05TWWQ3SlNVeEt6WUdabkpKYUJtWHlBY01ESEJ4NkJVV1plU1V3ZndKRmkvVks4a3NTWVZxNGt2TnpZQ0pnbnpQOEF3RHQ3K2lDTFFJQUFBPT0ifQ== -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBd3R5aVREbWl1QmlZR0JnWm1CaFlXUmdaZ1V5R1ZoRFE5eDBMUmdZV0ppQUhFWUdGZ1pPRUYwQlZDUU1aTEFBTVM4UUF5WFpId1B4RXdSZjZSQURnMFkwa00wSDRqdGtXY1I3YmoyNjNLSFFMM2I3OURkSDRlSXVHM1hVdVd0dU9yaG9HM0VuMWVpaldjU2FsNWliV2d4a0NJQXRnd2h5K2VhbnBPYm9SYVltRnNIY2t3ZGxzT1NtSnNMWVRNVXBhS1p4RnVXWDY4Rk1CRHV6QVVqOC8vLy9IN3ExeVRtSnhUQnJZWUpjS1lrbGlYcHBSVUQ5UUI2NkZ2YjhncExNL0R5Z0ppWlF3TENoYVdZc1FoTVFLTTBEdVNSRk56bWpOQzliMTlBSVRaNjVJQzhkWkNsWUNBSjRvV3dtSkRZTHhCbE0vNkhhMmFEYTJWTHowalB6VW1IK3lVbE1TczJCbVp5U1dnWmw4Z0VEQkJ3ZWVnVkZtWGtsTUk4Q1JZdjFTdkpMRW1GYXVKTHpjMkFpWUs4ei9BTUFLUlNDMGk0Q0FBQT0ifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Model.Year"],"name":[1],"type":["int"],"align":["right"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019","2":"8898","3":"209.7616","4":"41.38416"},{"1":"2020","2":"10331","3":"276.8979","4":"40.33746"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeSh5ZWFyTW9kZWwpXG5gYGAifQ== -->
-<pre class="r"><code>summary(yearModel)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgRGYgICBTdW0gU3EgIE1lYW4gU3EgRiB2YWx1ZSBQcig+RikgICAgXG5Nb2RlbC5ZZWFyICAgICAgMSAyMTU0NzI2NyAyMTU0NzI2NyAgIDEyOTI4IDwyZS0xNiAqKipcblJlc2lkdWFscyAgIDE5MjI3IDMyMDQ1NDkzICAgICAxNjY3ICAgICAgICAgICAgICAgICAgIFxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG4ifQ== -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgRGYgICBTdW0gU3EgIE1lYW4gU3EgRiB2YWx1ZSBQcig+RikgICAgXG5Nb2RlbC5ZZWFyICAgICAgMSAyMTU0NzI2NyAyMTU0NzI2NyAgIDEyOTI4IDwyZS0xNiAqKipcblJlc2lkdWFscyAgIDE5MjI3IDMyMDQ1NDkzICAgICAxNjY3ICAgICAgICAgICAgICAgICAgIFxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG4gY29udHJhc3QgICAgICAgICAgICAgICAgICAgICAgICBlc3RpbWF0ZSAgIFNFICAgIGRmICB0LnJhdGlvIHAudmFsdWVcbiBNb2RlbC5ZZWFyMjAxOSAtIE1vZGVsLlllYXIyMDIwICAgIC02Ny4xIDAuNTkgMTkyMjcgLTExMy43MDIgIDwuMDAwMVxuIn0= -->
 <pre><code>               Df   Sum Sq  Mean Sq F value Pr(&gt;F)    
 Model.Year      1 21547267 21547267   12928 &lt;2e-16 ***
 Residuals   19227 32045493     1667                   
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW9kZWxfbWVhbnMgPSBlbW1lYW5zKHllYXJNb2RlbCwgfiBNb2RlbC5ZZWFyKVxucGFpcnMobW9kZWxfbWVhbnMsIGFkanVzdCA9IFwidHVrZXlcIilcbmBgYCJ9 -->
-<pre class="r"><code>model_means = emmeans(yearModel, ~ Model.Year)
-pairs(model_means, adjust = &quot;tukey&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiIGNvbnRyYXN0ICAgICAgICAgICAgICAgICAgICAgICAgZXN0aW1hdGUgICBTRSAgICBkZiAgdC5yYXRpbyBwLnZhbHVlXG4gTW9kZWwuWWVhcjIwMTkgLSBNb2RlbC5ZZWFyMjAyMCAgICAtNjcuMSAwLjU5IDE5MjI3IC0xMTMuNzAyICA8LjAwMDFcbiJ9 -->
-<pre><code> contrast                        estimate   SE    df  t.ratio p.value
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+ contrast                        estimate   SE    df  t.ratio p.value
  Model.Year2019 - Model.Year2020    -67.1 0.59 19227 -113.702  &lt;.0001</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2xlbmd0aChmaWx0ZXIoZXZEYXRhLCBNb2RlbC5ZZWFyID09IDIwMjApJEVsZWN0cmljLlJhbmdlKVxuI2hpc3QoZXZEYXRhJE1vZGVsLlllYXIsIGJyZWFrcz1zZXEoMTk5OSwgMjAyNiwgYnkgPSAxKSlcbmBgYCJ9 -->
-<pre class="r"><code>#length(filter(evData, Model.Year == 2020)$Electric.Range)
-#hist(evData$Model.Year, breaks=seq(1999, 2026, by = 1))</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ1NDSTQwMyBBbmFseXNpcyIKb3V0cHV0OgogIHBkZl9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQKLS0tCgpgYGB7cn0KbGlicmFyeShlbW1lYW5zKQpsaWJyYXJ5KFN0YXQyRGF0YSkKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkobW9zYWljKQpsaWJyYXJ5KGdnZm9ybXVsYSkKbGlicmFyeShkcGx5cikKCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gRikKZXZEYXRhIDwtIHJlYWQuY3N2KCJkYXRhL0VsZWN0cmljIFZlaGljbGUgRGF0YS5jc3YiKQpgYGAKCkZpcnN0LCB3ZSBjYW4gc3RhcnQgYnkgY2hlY2tpbmcgdG8gc2VlIGlmIHRoZSBlbGVjdHJpYyB2ZWhpY2xlIHR5cGUgcmVzdWx0cyBpbiBkaWZmZXJlbnQgZWxlY3RyaWMgcmFuZ2VzLgoKYGBge3J9CiMgU3RhcnQgYnkgZGVsZXRpbmcgYWxsIHJvd3Mgd2l0aCBhbiBlbGVjdHJpYyByYW5nZSBvZiB6ZXJvCmV2RGF0YSA8LSBmaWx0ZXIoZXZEYXRhLCBFbGVjdHJpYy5SYW5nZSAhPSAwKQoKbW9kZWwgPC0gYW92KEVsZWN0cmljLlJhbmdlIH4gRWxlY3RyaWMuVmVoaWNsZS5UeXBlLCBkYXRhID0gZXZEYXRhKQoKZGZfc3VtbWFyeSA8LSBldkRhdGEgJT4lCiAgZ3JvdXBfYnkoRWxlY3RyaWMuVmVoaWNsZS5UeXBlKSAlPiUKICBzdW1tYXJpemUoCiAgICBuID0gbigpLAogICAgbWVhbiA9IG1lYW4oRWxlY3RyaWMuUmFuZ2UsIG5hLnJtID0gVFJVRSksCiAgICBzZCA9IHNkKEVsZWN0cmljLlJhbmdlLCBuYS5ybSA9IFRSVUUpCiAgKQpkZl9zdW1tYXJ5CmBgYAoKYGBge3J9CiMgU3RhcnQgYnkgZmlsdGVyaW5nIHRoZSBkYXRhIHRvIG9ubHkgaW5jbHVkZSByb3dzIHdpdGggdGhlIEJhdHRlcnkgRWxlY3RyaWMgVmVoaWNsZSAoQkVWKSBjb2x1bW4gdmFsdWUKb25seUVsZWN0cmljIDwtIGZpbHRlcihldkRhdGEsIEVsZWN0cmljLlZlaGljbGUuVHlwZSA9PSAiQmF0dGVyeSBFbGVjdHJpYyBWZWhpY2xlIChCRVYpIikKIyBDcmVhdGUgYSBuZXcgZGF0YWZyYW1lIHcKdGVzbGFNb2RlbCA8LSBhb3YoRWxlY3RyaWMuUmFuZ2UgfiBNYWtlLCBkYXRhID0gb25seUVsZWN0cmljKQoKYGBgCgpEbyB3ZSBoYXZlIGV2aWRlbmNlIHRvIHNob3cgdGhhdCBlbGVjdHJpYyBjYXJzIGhhdmUgaW5jcmVhc2VkIGluIGF2ZXJhZ2UgcmFuZ2UgaW4gMjAyMCBjb21wYXJlZCB0byBpbiAyMDE5PwoKYGBge3J9CnllYXJFbGVjdHJpYyA8LSBmaWx0ZXIob25seUVsZWN0cmljLCBNb2RlbC5ZZWFyID09IDIwMjAgfCBNb2RlbC5ZZWFyID09IDIwMTkpCnllYXJNb2RlbCA8LSBhb3YoRWxlY3RyaWMuUmFuZ2UgfiBNb2RlbC5ZZWFyLCBkYXRhID0geWVhckVsZWN0cmljKQpkZl9zdW1tYXJ5IDwtIHllYXJFbGVjdHJpYyAlPiUKICBncm91cF9ieShNb2RlbC5ZZWFyKSAlPiUKICBzdW1tYXJpemUoCiAgICBuID0gbigpLAogICAgbWVhbiA9IG1lYW4oRWxlY3RyaWMuUmFuZ2UsIG5hLnJtID0gVFJVRSksCiAgICBzZCA9IHNkKEVsZWN0cmljLlJhbmdlLCBuYS5ybSA9IFRSVUUpCiAgKQpkZl9zdW1tYXJ5CnN1bW1hcnkoeWVhck1vZGVsKQptb2RlbF9tZWFucyA9IGVtbWVhbnMoeWVhck1vZGVsLCB+IE1vZGVsLlllYXIpCnBhaXJzKG1vZGVsX21lYW5zLCBhZGp1c3QgPSAidHVrZXkiKQpgYGAKCmBgYHtyfQojbGVuZ3RoKGZpbHRlcihldkRhdGEsIE1vZGVsLlllYXIgPT0gMjAyMCkkRWxlY3RyaWMuUmFuZ2UpCiNoaXN0KGV2RGF0YSRNb2RlbC5ZZWFyLCBicmVha3M9c2VxKDE5OTksIDIwMjYsIGJ5ID0gMSkpCiMgVGhlIGJpZyBxdWVzdGlvbjogZG8gd2UgaGF2ZSBldmlkZW5jZSB0byBzaG93IHRoYXQgdGhlIGxlYWRpbmcgcG9saXRpY2FsIHBhcnR5IGluIGEgbGVnaXNsYXRpdmUgZGlzdHJpY3QgcmVzdWx0cyBpbiBmZXdlciBvciBtb3JlIGVsZWN0cmljIGNhcnMgY29tcGFyZWQgdG8gb3RoZXIgcG9saXRpY2FsIHBhcnRpZXM/CgpgYGA=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ1NDSTQwMyBBbmFseXNpcyIKb3V0cHV0OgogIHBkZl9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQKLS0tCgpgYGB7cn0KbGlicmFyeShlbW1lYW5zKQpsaWJyYXJ5KFN0YXQyRGF0YSkKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkobW9zYWljKQpsaWJyYXJ5KGdnZm9ybXVsYSkKbGlicmFyeShkcGx5cikKCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gRikKZXZEYXRhIDwtIHJlYWQuY3N2KCJkYXRhL0VsZWN0cmljIFZlaGljbGUgRGF0YS5jc3YiKQpsZWdEYXRhIDwtIHJlYWQuY3N2KCJkYXRhL2NsZWFuX2xlZ2lzbGF0aXZlLmNzdiIpCmBgYAoKRmlyc3QsIHdlIGNhbiBzdGFydCBieSBjaGVja2luZyB0byBzZWUgaWYgdGhlIGVsZWN0cmljIHZlaGljbGUgdHlwZSByZXN1bHRzIGluIGRpZmZlcmVudCBlbGVjdHJpYyByYW5nZXMuCgpgYGB7cn0KIyBTdGFydCBieSBkZWxldGluZyBhbGwgcm93cyB3aXRoIGFuIGVsZWN0cmljIHJhbmdlIG9mIHplcm8KZXZEYXRhIDwtIGZpbHRlcihldkRhdGEsIEVsZWN0cmljLlJhbmdlICE9IDApCgptb2RlbCA8LSBhb3YoRWxlY3RyaWMuUmFuZ2UgfiBFbGVjdHJpYy5WZWhpY2xlLlR5cGUsIGRhdGEgPSBldkRhdGEpCgpkZl9zdW1tYXJ5IDwtIGV2RGF0YSAlPiUKICBncm91cF9ieShFbGVjdHJpYy5WZWhpY2xlLlR5cGUpICU+JQogIHN1bW1hcml6ZSgKICAgIG4gPSBuKCksCiAgICBtZWFuID0gbWVhbihFbGVjdHJpYy5SYW5nZSwgbmEucm0gPSBUUlVFKSwKICAgIHNkID0gc2QoRWxlY3RyaWMuUmFuZ2UsIG5hLnJtID0gVFJVRSkKICApCmRmX3N1bW1hcnkKYGBgCgpgYGB7cn0KIyBTdGFydCBieSBmaWx0ZXJpbmcgdGhlIGRhdGEgdG8gb25seSBpbmNsdWRlIHJvd3Mgd2l0aCB0aGUgQmF0dGVyeSBFbGVjdHJpYyBWZWhpY2xlIChCRVYpIGNvbHVtbiB2YWx1ZQpvbmx5RWxlY3RyaWMgPC0gZmlsdGVyKGV2RGF0YSwgRWxlY3RyaWMuVmVoaWNsZS5UeXBlID09ICJCYXR0ZXJ5IEVsZWN0cmljIFZlaGljbGUgKEJFVikiKQojIENyZWF0ZSBhIG5ldyBkYXRhZnJhbWUgdwp0ZXNsYU1vZGVsIDwtIGFvdihFbGVjdHJpYy5SYW5nZSB+IE1ha2UsIGRhdGEgPSBvbmx5RWxlY3RyaWMpCgpgYGAKCkRvIHdlIGhhdmUgZXZpZGVuY2UgdG8gc2hvdyB0aGF0IGVsZWN0cmljIGNhcnMgaGF2ZSBpbmNyZWFzZWQgaW4gYXZlcmFnZSByYW5nZSBpbiAyMDIwIGNvbXBhcmVkIHRvIGluIDIwMTk/CgpgYGB7cn0KeWVhckVsZWN0cmljIDwtIGZpbHRlcihvbmx5RWxlY3RyaWMsIE1vZGVsLlllYXIgPT0gMjAyMCB8IE1vZGVsLlllYXIgPT0gMjAxOSkKeWVhck1vZGVsIDwtIGFvdihFbGVjdHJpYy5SYW5nZSB+IE1vZGVsLlllYXIsIGRhdGEgPSB5ZWFyRWxlY3RyaWMpCmRmX3N1bW1hcnkgPC0geWVhckVsZWN0cmljICU+JQogIGdyb3VwX2J5KE1vZGVsLlllYXIpICU+JQogIHN1bW1hcml6ZSgKICAgIG4gPSBuKCksCiAgICBtZWFuID0gbWVhbihFbGVjdHJpYy5SYW5nZSwgbmEucm0gPSBUUlVFKSwKICAgIHNkID0gc2QoRWxlY3RyaWMuUmFuZ2UsIG5hLnJtID0gVFJVRSkKICApCmRmX3N1bW1hcnkKc3VtbWFyeSh5ZWFyTW9kZWwpCm1vZGVsX21lYW5zID0gZW1tZWFucyh5ZWFyTW9kZWwsIH4gTW9kZWwuWWVhcikKcGFpcnMobW9kZWxfbWVhbnMsIGFkanVzdCA9ICJ0dWtleSIpCmBgYAoKYGBge3J9CiNsZW5ndGgoZmlsdGVyKGV2RGF0YSwgTW9kZWwuWWVhciA9PSAyMDIwKSRFbGVjdHJpYy5SYW5nZSkKI2hpc3QoZXZEYXRhJE1vZGVsLlllYXIsIGJyZWFrcz1zZXEoMTk5OSwgMjAyNiwgYnkgPSAxKSkKCiMgVGhlIGJpZyBxdWVzdGlvbjogZG8gd2UgaGF2ZSBldmlkZW5jZSB0byBzaG93IHRoYXQgdGhlIGxlYWRpbmcgcG9saXRpY2FsIHBhcnR5IGluIGEgbGVnaXNsYXRpdmUgZGlzdHJpY3QgcmVzdWx0cyBpbiBmZXdlciBvciBtb3JlIGVsZWN0cmljIGNhcnMgY29tcGFyZWQgdG8gb3RoZXIgcG9saXRpY2FsIHBhcnRpZXM/CmxlZ01vZGVsIDwtIGFvdih0b3RhbF92b3RlcyB+IHBhcnR5LCBkYXRhID0gbGVnRGF0YSkKZGZfc3VtbWFyeSA8LSBsZWdEYXRhICU+JQogIGdyb3VwX2J5KHBhcnR5KSAlPiUKICBzdW1tYXJpemUoCiAgICBuID0gbigpLAogICAgbWVhbiA9IG1lYW4odG90YWxfdm90ZXMsIG5hLnJtID0gVFJVRSksCiAgICBzZCA9IHNkKHRvdGFsX3ZvdGVzLCBuYS5ybSA9IFRSVUUpCiAgKQpkZl9zdW1tYXJ5CnN1bW1hcnkobGVnTW9kZWwpCm1vZGVsX21lYW5zID0gZW1tZWFucyhsZWdNb2RlbCwgfiBwYXJ0eSkKcGFpcnMobW9kZWxfbWVhbnMsIGFkanVzdCA9ICJ0dWtleSIpCmBgYA==</div>
 
 
 
