@@ -31,22 +31,6 @@ CREATE TABLE electric_vehicles (
 );
 \copy electric_vehicles FROM 'data/Electric Vehicle Data.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
 
-CREATE TABLE district_elections (
-    District TEXT,
-    Candidate TEXT,
-    Party TEXT,
-    Total_Votes INT,
-    Won TEXT
-);
-
-\copy district_elections FROM 'data/house_candidate.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
-
-CREATE TABLE district_politics (
-    District TEXT,
-    Party Text,
-    Total_Votes INT
-);
-
 --Data cleaning
 UPDATE electric_vehicles
 SET "Make" = NULL WHERE TRIM("Make") = '';
@@ -61,10 +45,6 @@ WHERE "Electric Range"::TEXT ~ '^[0-9]+$';
 
 DELETE FROM electric_vehicles
 WHERE "Electric Range" = 0;
-
-
-INSERT INTO district_politics 
-SELECT district, party, total_votes FROM district_elections WHERE won LIKE 'True';
 
 --Normalizing into BCNF
 
@@ -132,6 +112,26 @@ ALTER TABLE details_location ADD CONSTRAINT fk_details_location_dol FOREIGN KEY 
 ALTER TABLE vehicle_details ADD CONSTRAINT chk_model_year CHECK ("Model Year" >= 1900 AND "Model Year" <= EXTRACT(YEAR FROM CURRENT_DATE));
 ALTER TABLE vehicle_details ADD CONSTRAINT chk_electric_range CHECK ("Electric Range" >= 0);
 
+--District elections
+CREATE TABLE district_elections (
+    District TEXT,
+    Candidate TEXT,
+    Party TEXT,
+    Total_Votes INT,
+    Won TEXT
+);
+
+\copy district_elections FROM 'data/house_candidate.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
+
+CREATE TABLE district_politics (
+    District TEXT,
+    Party Text,
+    Total_Votes INT
+);
+
+INSERT INTO district_politics 
+SELECT district, party, total_votes FROM district_elections WHERE won LIKE 'True';
+
 --Term-116 data (I'm not sure if this data is useful)
 DROP TABLE IF EXISTS term_data;
 CREATE TABLE term_data (
@@ -183,6 +183,15 @@ CREATE TABLE uncleaned_legislative_data(
 );
 \copy uncleaned_legislative_data FROM 'data/20201103_legislative.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
 
+
+UPDATE uncleaned_legislative_data
+SET "Party" = 'Republican'
+WHERE "Party" LIKE '%Republican%' OR "Party" LIKE '%GOP%';
+
+UPDATE uncleaned_legislative_data
+SET "Party" = 'Democrat'
+WHERE "Party" LIKE '%Democrat%';
+
 DROP TABLE IF EXISTS legislative_data;
 CREATE TABLE legislative_data(
     district INTEGER NOT NULL,
@@ -194,17 +203,19 @@ WITH RankedResults AS (
     SELECT
         CAST(SUBSTR("Race", 22, 2) AS INTEGER) AS district,
         "Party",
-        "Votes",
+        "Votes" / ("PercentageOfTotalVotes" / 100) AS total_votes,
         ROW_NUMBER() OVER (PARTITION BY CAST(SUBSTR("Race", 22, 2) AS INTEGER) ORDER BY "Votes" DESC) AS Rank
     FROM uncleaned_legislative_data
-    WHERE "Race" LIKE '%State Representative Pos. 1%'
+    WHERE "Race" LIKE '%State Representative Pos. 1%' OR "Race" LIKE '%Representative, Position 1%'
 )
 SELECT
     district,
     "Party",
-    "Votes"
+    total_votes
 FROM RankedResults
-WHERE Rank = 1;
+WHERE Rank = 1 ORDER BY district;
+
+
 
 --Interesting queries
 --Query1 (Aidan)
