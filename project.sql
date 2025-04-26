@@ -178,6 +178,20 @@ FROM vehicle_details
 GROUP BY "Make", "Model"
 ORDER BY "Make", "Model";
 
+--Query2
+SELECT COUNT(*) AS vehicles_registered, "Make", "Model"
+FROM vehicle_details
+GROUP BY "Make", "Model"
+ORDER BY vehicles_registered DESC;
+
+--Query 3
+SELECT COUNT(*) AS vehicles_registered, "Make"
+FROM vehicle_details
+GROUP BY "Make"
+ORDER BY vehicles_registered DESC;
+
+--Query 4
+
 
 --Everything below this point was part of Chris's original assignment.
 --We can use some of it so I don't want to delete it, but I am commenting it out for organizational purposes
