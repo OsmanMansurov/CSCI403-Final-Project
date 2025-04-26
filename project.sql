@@ -84,7 +84,7 @@ CREATE TABLE vehicle_location (
     "State" TEXT NOT NULL,
     "Postal Code" TEXT NOT NULL,
     "2020 Census Tract" TEXT,
-    "Legislative District" INT,
+    "Legislative District" INT NOT NULL,
     "Clean Alternative Fuel Vehicle (CAFV) Eligibility" TEXT,
     "Vehicle Location" TEXT,
     "Electric Utility" TEXT
@@ -108,17 +108,16 @@ WHERE "VIN (1-10)" IS NOT NULL;
 INSERT INTO vehicle_location ("DOL Vehicle ID", "County", "City", "State", "Postal Code", "2020 Census Tract", "Legislative District", "Vehicle Location", "Electric Utility")
 SELECT DISTINCT "DOL Vehicle ID", "County", "City", "State", "Postal Code", "2020 Census Tract", "Legislative District", "Vehicle Location", "Electric Utility"
 FROM electric_vehicles
-WHERE "DOL Vehicle ID" IS NOT NULL;
-
-DELETE FROM details_location
-WHERE "DOL Vehicle ID" NOT IN (SELECT "DOL Vehicle ID" FROM vehicle_location);
+WHERE "DOL Vehicle ID" IS NOT NULL AND "Legislative District" IS NOT NULL;
 
 
 INSERT INTO details_location ("VIN (1-10)", "DOL Vehicle ID")
 SELECT DISTINCT "VIN (1-10)", "DOL Vehicle ID"
 FROM electric_vehicles
-WHERE "VIN (1-10)" IS NOT NULL AND "DOL Vehicle ID" IS NOT NULL;
+WHERE "VIN (1-10)" IS NOT NULL AND "DOL Vehicle ID" IS NOT NULL AND "Legislative District" IS NOT NULL;
 
+DELETE FROM details_location
+WHERE "DOL Vehicle ID" NOT IN (SELECT "DOL Vehicle ID" FROM vehicle_location);
 
 
 -- Keys and constraints
@@ -133,7 +132,7 @@ ALTER TABLE details_location ADD CONSTRAINT fk_details_location_dol FOREIGN KEY 
 ALTER TABLE vehicle_details ADD CONSTRAINT chk_model_year CHECK ("Model Year" >= 1900 AND "Model Year" <= EXTRACT(YEAR FROM CURRENT_DATE));
 ALTER TABLE vehicle_details ADD CONSTRAINT chk_electric_range CHECK ("Electric Range" >= 0);
 
---Import political data
+--Term-116 data (I'm not sure if this data is useful)
 DROP TABLE IF EXISTS term_data;
 CREATE TABLE term_data (
     "id" TEXT,
@@ -170,6 +169,42 @@ SELECT
     SUBSTR(area_id, 1, 2),
     CAST(SUBSTR(area_id, 4) AS INTEGER)
 FROM term_data;
+
+
+--Legislative district information Washington
+DROP TABLE IF EXISTS uncleaned_legislative_data;
+CREATE TABLE uncleaned_legislative_data(
+    "Race" TEXT,
+    "Candidate" TEXT,
+    "Party" TEXT,
+    "Votes" INTEGER,
+    "PercentageOfTotalVotes" NUMERIC,
+    "JurisdictionName" TEXT
+);
+\copy uncleaned_legislative_data FROM 'data/20201103_legislative.csv' WITH (DELIMITER ',', FORMAT CSV, HEADER);
+
+DROP TABLE IF EXISTS legislative_data;
+CREATE TABLE legislative_data(
+    district INTEGER NOT NULL,
+    party TEXT NOT NULL,
+    total_votes INTEGER NOT NULL
+);
+INSERT INTO legislative_data (district, party, total_votes)
+WITH RankedResults AS (
+    SELECT
+        CAST(SUBSTR("Race", 22, 2) AS INTEGER) AS district,
+        "Party",
+        "Votes",
+        ROW_NUMBER() OVER (PARTITION BY CAST(SUBSTR("Race", 22, 2) AS INTEGER) ORDER BY "Votes" DESC) AS Rank
+    FROM uncleaned_legislative_data
+    WHERE "Race" LIKE '%State Representative Pos. 1%'
+)
+SELECT
+    district,
+    "Party",
+    "Votes"
+FROM RankedResults
+WHERE Rank = 1;
 
 --Interesting queries
 --Query1 (Aidan)
