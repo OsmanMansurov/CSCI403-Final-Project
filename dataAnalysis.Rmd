@@ -65,4 +65,5 @@ pairs(model_means, adjust = "tukey")
 #length(filter(evData, Model.Year == 2020)$Electric.Range)
 #hist(evData$Model.Year, breaks=seq(1999, 2026, by = 1))
 # The big question: do we have evidence to show that the leading political party in a legislative district results in fewer or more electric cars compared to other political parties?
+
 ```
