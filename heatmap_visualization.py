@@ -21,7 +21,7 @@ connection = pg8000.connect(user=username, password=getpass(), host="ada.mines.e
 
 cursor = connection.cursor()
 cursor.execute('SET search_path TO group12;')
-cursor.execute('SELECT "Legislative District" AS district, COUNT("DOL Vehicle ID") AS car_count FROM vehicle_location WHERE "Legislative District" IS NOT NULL GROUP BY "Legislative District" ORDER BY district;')
+cursor.execute('SELECT "Legislative District" AS district, COUNT("VIN (1-10)") AS car_count FROM vehicle_location JOIN details_location USING ("DOL Vehicle ID") JOIN vehicle_details USING ("VIN (1-10)") WHERE "Legislative District" IS NOT NULL AND "Model Year" < 2021 GROUP BY "Legislative District" ORDER BY district;')
 car_counts = pd.DataFrame(cursor.fetchall(), columns=["district", "car_counts"])
 
 heatmap_data = gdf.merge(car_counts, left_on='OBJECTID',right_on='district')
