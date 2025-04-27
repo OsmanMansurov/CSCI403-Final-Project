@@ -217,8 +217,7 @@ WHERE Rank = 1 ORDER BY district;
 
 
 
---Interesting queries
---Query1 (Aidan)
+--Interesting queries(Aidan)
 SELECT DISTINCT "Make", "Model", AVG("Electric Range") as "Avg_Range"
 FROM vehicle_details
 GROUP BY "Make", "Model"
@@ -237,6 +236,19 @@ GROUP BY "Make"
 ORDER BY vehicles_registered DESC;
 
 --Query 4
+SELECT party, COUNT(*)
+FROM legislative_data JOIN vehicle_location ON legislative_data.district = vehicle_location."Legislative District"
+GROUP BY party;  
+
+--Query 5
+WITH vehicles_registered AS(
+    SELECT "Make", "Legislative District"
+    FROM ((vehicle_details JOIN details_location ON vehicle_details."VIN (1-10)"=details_location."VIN (1-10)") 
+    JOIN vehicle_location ON details_location."DOL Vehicle ID"=vehicle_location."DOL Vehicle ID")
+)
+SELECT "Make", COUNT(*), party
+FROM legislative_data JOIN vehicles_registered ON legislative_data.district = vehicles_registered."Legislative District"
+GROUP BY "Make",party ORDER BY "Make", count DESC;
 
 
 --Everything below this point was part of Chris's original assignment.
