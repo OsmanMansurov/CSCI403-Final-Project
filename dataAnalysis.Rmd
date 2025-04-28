@@ -12,10 +12,12 @@ library(tidyverse)
 library(mosaic)
 library(ggformula)
 library(dplyr)
+library(car)
 
 knitr::opts_chunk$set(echo = F)
 evData <- read.csv("data/Electric Vehicle Data.csv")
 legData <- read.csv("data/clean_legislative.csv")
+carsPerDistrict <- read.csv("data/cars_per_district.csv")
 ```
 
 First, we can start by checking to see if the electric vehicle type results in different electric ranges.
@@ -36,20 +38,16 @@ df_summary <- evData %>%
 df_summary
 ```
 
+Do we have evidence to show that electric cars have increased in range over the years?
+
 ```{r}
-# Start by filtering the data to only include rows with the Battery Electric Vehicle (BEV) column value
+library(gt)
+
 onlyElectric <- filter(evData, Electric.Vehicle.Type == "Battery Electric Vehicle (BEV)")
-# Create a new dataframe w
-teslaModel <- aov(Electric.Range ~ Make, data = onlyElectric)
-
-```
-
-Do we have evidence to show that electric cars have increased in average range in 2020 compared to in 2019?
-
-```{r}
-yearElectric <- filter(onlyElectric, Model.Year == 2020 | Model.Year == 2019)
-yearModel <- aov(Electric.Range ~ Model.Year, data = yearElectric)
-df_summary <- yearElectric %>%
+# Filter out data before 2011 and up to 2020
+onlyElectric <- filter(onlyElectric, Model.Year > 2010 & Model.Year <= 2020)
+yearModel <- lm(Electric.Range ~ factor(Model.Year), data = onlyElectric)
+df_summary <- onlyElectric %>%
   group_by(Model.Year) %>%
   summarize(
     n = n(),
@@ -57,9 +55,36 @@ df_summary <- yearElectric %>%
     sd = sd(Electric.Range, na.rm = TRUE)
   )
 df_summary
-summary(yearModel)
-model_means = emmeans(yearModel, ~ Model.Year)
-pairs(model_means, adjust = "tukey")
+
+model_means = emmeans(yearModel, ~ factor(Model.Year))
+table <- as.data.frame(pairs(model_means, adjust = "tukey"))
+output <- gt(table)
+
+# AI generated part here to only consider years next to each other. Works somehow!
+# Step 1: Get the estimated marginal means
+model_means <- emmeans(yearModel, ~ Model.Year)
+
+# Step 2: Get unique years, sorted
+years <- sort(unique(onlyElectric$Model.Year))
+
+# Step 3: Build *named* adjacent contrasts manually
+adjacent_contrasts <- list()
+
+for (i in 1:(length(years) - 1)) {
+  name <- paste0(years[i], " - ", years[i+1])
+  contrast_vector <- rep(0, length(years))
+  contrast_vector[i] <- 1
+  contrast_vector[i+1] <- -1
+  adjacent_contrasts[[name]] <- contrast_vector
+}
+
+# Step 4: Now contrast!
+adjacent_contrasts_result <- contrast(model_means, method = adjacent_contrasts)
+
+# Step 5: View
+output <- gt(summary(adjacent_contrasts_result))
+gtsave(output, filename = "table.png")
+mplot(yearModel, which = 2)
 ```
 
 ```{r}
@@ -67,16 +92,31 @@ pairs(model_means, adjust = "tukey")
 #hist(evData$Model.Year, breaks=seq(1999, 2026, by = 1))
 
 # The big question: do we have evidence to show that the leading political party in a legislative district results in fewer or more electric cars compared to other political parties?
-legModel <- aov(total_votes ~ party, data = legData)
-df_summary <- legData %>%
+carsPerDistrictScaled <- carsPerDistrict
+for (x in 1:49) {
+  carsPerDistrictScaled$car_counts[x] <- carsPerDistrict$car_counts[x] / legData$total_votes[x]
+}
+
+carsPerDistrictScaled$party <- legData$party
+carsPerDistrictScaled$party <- as.factor(carsPerDistrictScaled$party)
+legModel <- lm(car_counts ~ party, data = carsPerDistrictScaled)
+summary(legModel)
+
+df_summary <- carsPerDistrictScaled %>%
   group_by(party) %>%
   summarize(
     n = n(),
-    mean = mean(total_votes, na.rm = TRUE),
-    sd = sd(total_votes, na.rm = TRUE)
+    mean = mean(car_counts, na.rm = TRUE),
+    sd = sd(car_counts, na.rm = TRUE)
   )
 df_summary
-summary(legModel)
+
+# Check equal variance
+car::leveneTest(legModel)
+
+# Check normality
+mplot(legModel, which = 2)
+
 model_means = emmeans(legModel, ~ party)
 pairs(model_means, adjust = "tukey")
 ```
