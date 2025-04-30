@@ -1,9 +1,0 @@
----
-title: "CSCI403 Analysis"
-output: html_notebook
----
-
-```{r}
-data <- read.csv("Electric Vehicle Data.csv")
-model <- lm()
-```
